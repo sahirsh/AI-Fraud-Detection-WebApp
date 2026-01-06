@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from inference  import predict_job_fraud
+from api.inference  import predict_job_fraud
 
 app = Flask(__name__)
 
