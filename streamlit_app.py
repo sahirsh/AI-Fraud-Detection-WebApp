@@ -3,7 +3,18 @@ import os
 import requests
 import streamlit as st
 
-API_URL = os.getenv("FRAUD_API_URL", "http://127.0.0.1:5000").rstrip("/")
+
+def resolve_api_url() -> str:
+    try:
+        url = st.secrets["FRAUD_API_URL"]
+        if url:
+            return str(url).rstrip("/")
+    except Exception:
+        pass
+    return os.getenv("FRAUD_API_URL", "http://127.0.0.1:5000").rstrip("/")
+
+
+API_URL = resolve_api_url()
 
 st.set_page_config(page_title="Job Fraud Detector", layout="centered")
 st.title("Job Posting Fraud Detector")
@@ -36,7 +47,7 @@ if submitted:
                 response = requests.post(
                     f"{API_URL}/predict",
                     json=payload,
-                    timeout=30,
+                    timeout=60,
                 )
             response.raise_for_status()
             result = response.json()

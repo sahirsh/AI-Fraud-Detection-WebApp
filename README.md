@@ -2,6 +2,8 @@
 
 Flask API that scores job listings for fraud risk using a TF-IDF + logistic regression model. A small Streamlit UI is included for trying requests against a running endpoint.
 
+**Live demo:** [https://ai-fraud-detection-webapp.streamlit.app/](https://ai-fraud-detection-webapp.streamlit.app/)
+
 Fake job postings are rare in the wild, so the training set is skewed (~95% legitimate on the primary EMSCAD-style dataset). The model uses `class_weight="balanced"` and is evaluated with precision, recall, and F1 on the fraud class—not accuracy alone.
 
 ## Model
